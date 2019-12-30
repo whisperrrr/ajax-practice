@@ -30,22 +30,27 @@ options = {
     xhr.open(options.method,options.url,true);
     //4.设置请求头部
     //5.调用send()
-    switch (options.method) {
-      case "GET":
-        xhr.send(null);
-        break;
-      case "POST":
-        xhr.setRequestHeader("Content-type","application/json");
-        xhr.send(JSON.stringify(options.data));
-        break;
-      case "PUT":
-        xhr.setRequestHeader("Content-type","application/json");
-        xhr.send(JSON.stringify(options.data));
-        break;
-      case "DELETE":
-        xhr.send(null);
-        break;
-      default:
-        break;
+    if (options.method === 'POST' || options.method === 'PUT') {
+      xhr.setRequestHeader("Content-type","application/json");
+      xhr.send(JSON.stringify(options.data));     
     }
+    xhr.send(options.data);
+    // switch (options.method) {
+    //   case "GET":
+    //     xhr.send(null);
+    //     break;
+    //   case "POST":
+    //     xhr.setRequestHeader("Content-type","application/json");
+    //     xhr.send(JSON.stringify(options.data));
+    //     break;
+    //   case "PUT":
+    //     xhr.setRequestHeader("Content-type","application/json");
+    //     xhr.send(JSON.stringify(options.data));
+    //     break;
+    //   case "DELETE":
+    //     xhr.send(null);
+    //     break;
+    //   default:
+    //     break;
+    // }
   }
